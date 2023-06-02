@@ -20,6 +20,6 @@ public class ComputerFormConverter implements AttributeConverter<ComputerForm, S
         return Stream.of(ComputerForm.values())
                 .filter(computerForm -> computerForm.getForm().equals(s))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No such type"));
+                .orElseThrow(() -> new IllegalArgumentException("No such form:" + s));
     }
 }

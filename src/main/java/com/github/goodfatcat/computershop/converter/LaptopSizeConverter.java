@@ -21,6 +21,6 @@ public class LaptopSizeConverter implements AttributeConverter<LaptopSize, Doubl
         return Stream.of(LaptopSize.values())
                 .filter(laptopSize -> laptopSize.getSize() == size)
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No such type"));
+                .orElseThrow(() -> new IllegalArgumentException("No such size:" + size));
     }
 }

@@ -18,6 +18,6 @@ public class ProductTypeConverter implements AttributeConverter<ProductType, Str
         return Stream.of(ProductType.values())
                 .filter(productType -> productType.getCode().equals(s))
                 .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No such type"));
+                .orElseThrow(() -> new IllegalArgumentException("No such type:" + s));
     }
 }
