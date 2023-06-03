@@ -1,5 +1,6 @@
 package com.github.goodfatcat.computershop.model;
 
+import com.github.goodfatcat.computershop.DTO.AbstractProduct;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.EqualsAndHashCode;
@@ -15,8 +16,8 @@ import lombok.ToString;
 public class HardDriveEntity extends ProductEntity{
     private int capacity;
 
-    public HardDriveEntity(String seriesNumber, int price, int productCount, ProductProducer producer, int capacity) {
-        super(seriesNumber, price, productCount, producer);
+    public HardDriveEntity(AbstractProduct product, ProductProducer producer, int capacity) {
+        super(product, producer);
         this.capacity = capacity;
     }
 }

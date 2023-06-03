@@ -1,9 +1,12 @@
 package com.github.goodfatcat.computershop.service;
 
 import com.github.goodfatcat.computershop.DTO.*;
-import com.github.goodfatcat.computershop.model.Product;
+import com.github.goodfatcat.computershop.model.ProductEntity;
 
 public interface ProductService {
-    Product save(Product product);
-    Product save(AbstractProduct computer);
+    ProductEntity save(ProductEntity product);
+    ProductEntity save(Computer computer);
+    ProductEntity save(Laptop laptop);
+    ProductEntity save(Monitor monitor);
+    ProductEntity save(HardDrive hardDrive);
 }

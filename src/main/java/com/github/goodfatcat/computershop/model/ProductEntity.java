@@ -1,5 +1,6 @@
 package com.github.goodfatcat.computershop.model;
 
+import com.github.goodfatcat.computershop.DTO.AbstractProduct;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -24,6 +25,13 @@ public abstract class ProductEntity {
         this.seriesNumber = seriesNumber;
         this.price = price;
         this.productCount = productCount;
+        this.producer = producer;
+    }
+
+    public ProductEntity(AbstractProduct product, ProductProducer producer) {
+        this.seriesNumber = product.getSeriesNumber();
+        this.price = product.getPrice();
+        this.productCount = product.getCount();
         this.producer = producer;
     }
 }

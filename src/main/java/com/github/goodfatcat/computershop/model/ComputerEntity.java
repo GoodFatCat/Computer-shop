@@ -1,5 +1,6 @@
 package com.github.goodfatcat.computershop.model;
 
+import com.github.goodfatcat.computershop.DTO.AbstractProduct;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -16,8 +17,8 @@ import lombok.ToString;
 public class ComputerEntity extends ProductEntity{
     private ComputerForm form;
 
-    public ComputerEntity(String seriesNumber, int price, int productCount, ProductProducer producer, ComputerForm form) {
-        super(seriesNumber, price, productCount, producer);
+    public ComputerEntity(AbstractProduct product, ProductProducer producer, ComputerForm form) {
+        super(product, producer);
         this.form = form;
     }
 }

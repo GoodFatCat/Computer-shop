@@ -6,7 +6,6 @@ import lombok.Data;
 
 @Data
 public abstract class AbstractProduct {
-    private final ProductType type;
     @NotNull(message = "seriesNumber must be not null")
     private String seriesNumber;
     @Positive(message = "price must be positive")
@@ -18,8 +17,7 @@ public abstract class AbstractProduct {
     @NotNull(message = "producerName must be not null")
     private String producerName;
 
-    public AbstractProduct(ProductType type, String seriesNumber, int price, int count, String producerName) {
-        this.type = type;
+    public AbstractProduct(String seriesNumber, int price, int count, String producerName) {
         this.seriesNumber = seriesNumber;
         this.price = price;
         this.count = count;

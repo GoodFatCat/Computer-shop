@@ -1,7 +1,6 @@
 package com.github.goodfatcat.computershop.DTO;
 
 import com.github.goodfatcat.computershop.model.ComputerForm;
-import com.github.goodfatcat.computershop.model.ProductType;
 import jakarta.validation.constraints.NotNull;
 
 public class Computer extends AbstractProduct {
@@ -13,7 +12,7 @@ public class Computer extends AbstractProduct {
                     int count,
                     String producerName,
                     ComputerForm computerForm) {
-        super(ProductType.COMPUTER, seriesNumber, price, count, producerName);
+        super(seriesNumber, price, count, producerName);
         this.computerForm = computerForm;
     }
 

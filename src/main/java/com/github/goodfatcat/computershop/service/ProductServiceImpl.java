@@ -1,10 +1,7 @@
 package com.github.goodfatcat.computershop.service;
 
 import com.github.goodfatcat.computershop.DTO.*;
-import com.github.goodfatcat.computershop.model.HardDriveCapacity;
-import com.github.goodfatcat.computershop.model.MonitorSize;
-import com.github.goodfatcat.computershop.model.Product;
-import com.github.goodfatcat.computershop.model.ProductProducer;
+import com.github.goodfatcat.computershop.model.*;
 import com.github.goodfatcat.computershop.repository.HardDriveCapacityRepository;
 import com.github.goodfatcat.computershop.repository.MonitorSizeRepository;
 import com.github.goodfatcat.computershop.repository.ProducerRepository;
@@ -28,72 +25,49 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public Product save(Product product) {
+    public ProductEntity save(ProductEntity product) {
         return productRepository.save(product);
     }
 
     @Override
-    public Product save(AbstractProduct abstractProduct) {
-        Product product = getProduct(abstractProduct);
-        return productRepository.save(product);
+    public ProductEntity save(Computer computer) {
+        ProductProducer producer = getProducer(computer);
+
+        ComputerEntity entity = new ComputerEntity(computer, producer, computer.getComputerForm());
+
+        return productRepository.save(entity);
     }
 
-    private Product getProduct(AbstractProduct abstractProduct) {
-        Product product = initProperties(abstractProduct);
-
-        initAdditionalProperties(abstractProduct, product);
-
-        return product;
+    private ProductProducer getProducer(AbstractProduct product) {
+        ProductProducer producer = new ProductProducer(product.getProducerName());
+        producer = producerRepository.findByName(product.getProducerName()).orElse(producer);
+        return producer;
     }
 
-    private Product initProperties(AbstractProduct abstractProduct) {
-        Product product = new Product();
-        product.setSeriesNumber(abstractProduct.getSeriesNumber());
-        product.setPrice(abstractProduct.getPrice());
-        product.setProductCount(abstractProduct.getCount());
+    @Override
+    public ProductEntity save(Laptop laptop) {
+        ProductProducer producer = getProducer(laptop);
 
-        String producerName = abstractProduct.getProducerName();
-        product.setProducer(getProducer(producerName));
+        LaptopEntity entity = new LaptopEntity(laptop, producer, laptop.getLaptopSize());
 
-        product.setType(abstractProduct.getType());
-        return product;
-    }
-    private void initAdditionalProperties(AbstractProduct abstractProduct, Product product) {
-        switch (abstractProduct.getType()) {
-            case COMPUTER -> {
-                Computer computer = (Computer) abstractProduct;
-                product.setComputerForm(computer.getComputerForm());
-            }
-            case LAPTOP -> {
-                Laptop laptop = (Laptop) abstractProduct;
-                product.setLaptopSize(laptop.getLaptopSize());
-            }
-            case MONITOR -> {
-                Monitor monitor = (Monitor) abstractProduct;
-                product.setMonitorSize(getMonitorSize(monitor.getMonitorSize()));
-            }
-            case HARD_DRIVER -> {
-                HardDrive hardDrive = (HardDrive) abstractProduct;
-                product.setHardDriveCapacity(getHardDriveCapacity(hardDrive.getHardDriveCapacity()));
-            }
-        }
+        return productRepository.save(entity);
     }
 
-    private ProductProducer getProducer(String producerName) {
-        ProductProducer productProducer = new ProductProducer();
-        productProducer.setName(producerName);
-        return producerRepository.findByName(producerName).orElse(productProducer);
+    @Override
+    public ProductEntity save(Monitor monitor) {
+        ProductProducer producer = getProducer(monitor);
+
+        MonitorEntity entity = new MonitorEntity(monitor, producer, monitor.getMonitorSize());
+
+        return productRepository.save(entity);
     }
 
-    private MonitorSize getMonitorSize(double size) {
-        MonitorSize monitorSize = new MonitorSize();
-        monitorSize.setSize(size);
-        return monitorSizeRepository.findBySize(size).orElse(monitorSize);
-    }
+    @Override
+    public ProductEntity save(HardDrive hardDrive) {
+        ProductProducer producer = getProducer(hardDrive);
 
-    private HardDriveCapacity getHardDriveCapacity(int capacity) {
-        HardDriveCapacity hardDriveCapacity = new HardDriveCapacity();
-        hardDriveCapacity.setCapacity(capacity);
-        return hardDriveCapacityRepository.findByCapacity(capacity).orElse(hardDriveCapacity);
+        HardDriveEntity entity = new HardDriveEntity(hardDrive, producer, hardDrive.getHardDriveCapacity());
+
+        return productRepository.save(entity);
     }
 }

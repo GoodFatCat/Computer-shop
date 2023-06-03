@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("api/add/monitor")
 public class MonitorController {
     private ProductService productService;
-    private String path = "api/add/monitor";
+    private final String path = "api/add/monitor";
 
     @Autowired
     public MonitorController(ProductService productService) {

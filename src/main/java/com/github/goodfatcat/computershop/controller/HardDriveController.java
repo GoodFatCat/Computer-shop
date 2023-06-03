@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/add/drive")
 public class HardDriveController {
     private ProductService productService;
-    private String path = "/api/add/drive";
+    private final String globalPath = "/api/add/drive";
 
     @Autowired
     public HardDriveController(ProductService productService) {
@@ -27,7 +27,7 @@ public class HardDriveController {
     @PostMapping("")
     public ResponseEntity<?> saveHardDrive(@RequestBody @Valid HardDrive hardDrive, Errors errors) {
         if (errors.hasErrors()) {
-            return ErrorsUtil.getResponseEntity(HttpStatus.BAD_REQUEST, path, ErrorsUtil.showErrors(errors));
+            return ErrorsUtil.getResponseEntity(HttpStatus.BAD_REQUEST, globalPath, ErrorsUtil.showErrors(errors));
         }
 
         productService.save(hardDrive);

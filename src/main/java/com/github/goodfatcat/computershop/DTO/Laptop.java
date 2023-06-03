@@ -1,7 +1,6 @@
 package com.github.goodfatcat.computershop.DTO;
 
 import com.github.goodfatcat.computershop.model.LaptopSize;
-import com.github.goodfatcat.computershop.model.ProductType;
 import jakarta.validation.constraints.NotNull;
 
 public class Laptop extends AbstractProduct{
@@ -9,7 +8,7 @@ public class Laptop extends AbstractProduct{
     private LaptopSize laptopSize;
 
     public Laptop(String seriesNumber, int price, int count, String producerName, LaptopSize laptopSize) {
-        super(ProductType.LAPTOP, seriesNumber, price, count, producerName);
+        super(seriesNumber, price, count, producerName);
         this.laptopSize = laptopSize;
     }
 

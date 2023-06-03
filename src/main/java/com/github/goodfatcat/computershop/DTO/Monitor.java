@@ -1,6 +1,5 @@
 package com.github.goodfatcat.computershop.DTO;
 
-import com.github.goodfatcat.computershop.model.ProductType;
 import jakarta.validation.constraints.Positive;
 
 public class Monitor extends AbstractProduct{
@@ -8,7 +7,7 @@ public class Monitor extends AbstractProduct{
     private double monitorSize;
 
     public Monitor(String seriesNumber, int price, int count, String producerName, double monitorSize) {
-        super(ProductType.MONITOR, seriesNumber, price, count, producerName);
+        super(seriesNumber, price, count, producerName);
         this.monitorSize = monitorSize;
     }
 

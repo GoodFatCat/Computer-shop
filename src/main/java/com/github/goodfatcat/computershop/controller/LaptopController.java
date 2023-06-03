@@ -17,7 +17,7 @@ import java.util.List;
 @RequestMapping("/api/add/laptop")
 public class LaptopController {
     private ProductService productService;
-    private String globalPath = "api/add/laptop";
+    private final String globalPath = "api/add/laptop";
 
     @Autowired
     public LaptopController(ProductService productService) {

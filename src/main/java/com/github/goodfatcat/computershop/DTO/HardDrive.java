@@ -1,6 +1,5 @@
 package com.github.goodfatcat.computershop.DTO;
 
-import com.github.goodfatcat.computershop.model.ProductType;
 import jakarta.validation.constraints.Positive;
 
 public class HardDrive extends AbstractProduct{
@@ -8,7 +7,7 @@ public class HardDrive extends AbstractProduct{
     private int hardDriveCapacity;
 
     public HardDrive(String seriesNumber, int price, int count, String producerName, int hardDriveCapacity) {
-        super(ProductType.HARD_DRIVE, seriesNumber, price, count, producerName);
+        super(seriesNumber, price, count, producerName);
         this.hardDriveCapacity = hardDriveCapacity;
     }
 
