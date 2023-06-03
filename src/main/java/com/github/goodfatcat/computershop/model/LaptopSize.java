@@ -1,5 +1,7 @@
 package com.github.goodfatcat.computershop.model;
 
+import com.fasterxml.jackson.annotation.JsonValue;
+
 public enum LaptopSize {
     SIZE13(13.0),
     SIZE14(14.0),
@@ -12,6 +14,7 @@ public enum LaptopSize {
         this.size = size;
     }
 
+    @JsonValue
     public double getSize() {
         return size;
     }

@@ -1,6 +1,5 @@
 package com.github.goodfatcat.computershop.DTO;
 
-import com.github.goodfatcat.computershop.model.ProductType;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Positive;
 import lombok.Data;
