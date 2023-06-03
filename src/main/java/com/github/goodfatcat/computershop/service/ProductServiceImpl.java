@@ -2,8 +2,8 @@ package com.github.goodfatcat.computershop.service;
 
 import com.github.goodfatcat.computershop.DTO.*;
 import com.github.goodfatcat.computershop.model.*;
-import com.github.goodfatcat.computershop.repository.HardDriveCapacityRepository;
-import com.github.goodfatcat.computershop.repository.MonitorSizeRepository;
+import com.github.goodfatcat.computershop.repository.HardDriveRepository;
+import com.github.goodfatcat.computershop.repository.MonitorRepository;
 import com.github.goodfatcat.computershop.repository.ProducerRepository;
 import com.github.goodfatcat.computershop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,15 +13,11 @@ import org.springframework.stereotype.Service;
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
     private final ProducerRepository producerRepository;
-    private final MonitorSizeRepository monitorSizeRepository;
-    private final HardDriveCapacityRepository hardDriveCapacityRepository;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ProducerRepository producerRepository, MonitorSizeRepository monitorSizeRepository, HardDriveCapacityRepository hardDriveCapacityRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ProducerRepository producerRepository) {
         this.productRepository = productRepository;
         this.producerRepository = producerRepository;
-        this.monitorSizeRepository = monitorSizeRepository;
-        this.hardDriveCapacityRepository = hardDriveCapacityRepository;
     }
 
     @Override
