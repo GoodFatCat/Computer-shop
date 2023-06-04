@@ -14,10 +14,10 @@ import lombok.ToString;
 @ToString(callSuper = true)
 @Table(name = "monitor")
 public class MonitorEntity extends ProductEntity{
-    private double size;
+    private double monitorSize;
 
-    public MonitorEntity(AbstractProductDTO product, ProductProducer producer, double size) {
+    public MonitorEntity(AbstractProductDTO product, ProducerEntity producer, double monitorSize) {
         super(product, producer);
-        this.size = size;
+        this.monitorSize = monitorSize;
     }
 }

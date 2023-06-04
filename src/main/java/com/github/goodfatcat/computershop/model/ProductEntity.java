@@ -19,9 +19,9 @@ public abstract class ProductEntity {
     private int productCount;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "producer_id")
-    private ProductProducer producer;
+    private ProducerEntity producer;
 
-    public ProductEntity(AbstractProductDTO product, ProductProducer producer) {
+    public ProductEntity(AbstractProductDTO product, ProducerEntity producer) {
         this.seriesNumber = product.getSeriesNumber();
         this.price = product.getPrice();
         this.productCount = product.getCount();

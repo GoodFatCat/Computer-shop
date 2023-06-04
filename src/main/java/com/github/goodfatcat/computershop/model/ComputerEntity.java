@@ -17,7 +17,7 @@ import lombok.ToString;
 public class ComputerEntity extends ProductEntity{
     private ComputerForm form;
 
-    public ComputerEntity(AbstractProductDTO product, ProductProducer producer, ComputerForm form) {
+    public ComputerEntity(AbstractProductDTO product, ProducerEntity producer, ComputerForm form) {
         super(product, producer);
         this.form = form;
     }

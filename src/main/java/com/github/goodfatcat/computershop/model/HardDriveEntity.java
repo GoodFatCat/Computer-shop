@@ -14,10 +14,10 @@ import lombok.ToString;
 @Table(name = "hard_drive")
 @ToString(callSuper = true)
 public class HardDriveEntity extends ProductEntity{
-    private int capacity;
+    private int hardDriveCapacity;
 
-    public HardDriveEntity(AbstractProductDTO product, ProductProducer producer, int capacity) {
+    public HardDriveEntity(AbstractProductDTO product, ProducerEntity producer, int hardDriveCapacity) {
         super(product, producer);
-        this.capacity = capacity;
+        this.hardDriveCapacity = hardDriveCapacity;
     }
 }

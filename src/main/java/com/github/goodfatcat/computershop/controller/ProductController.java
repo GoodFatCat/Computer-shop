@@ -1,10 +1,10 @@
 package com.github.goodfatcat.computershop.controller;
 
-import com.github.goodfatcat.computershop.DTO.AbstractProductDTO;
-import com.github.goodfatcat.computershop.model.ProductEntity;
-import com.github.goodfatcat.computershop.model.ProductType;
+import com.github.goodfatcat.computershop.DTO.*;
+import com.github.goodfatcat.computershop.model.*;
 import com.github.goodfatcat.computershop.service.ProductService;
 import com.github.goodfatcat.computershop.util.ErrorsUtil;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -17,6 +17,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/api/products")
+@Slf4j
 public class ProductController {
     private ProductService productService;
     private final String globalPath = "/api/products";
@@ -35,11 +36,14 @@ public class ProductController {
     @GetMapping("{id}")
     public ResponseEntity<?> getProductById(@PathVariable long id) {
         String path = globalPath + "/" + id;
-        Optional<ProductEntity> optionalProduct = productService.findById(id);
-        if (optionalProduct.isEmpty())
+        Optional<ProductEntity> product = productService.findById(id);
+
+        if (product.isEmpty()) {
             return ErrorsUtil.getResponseEntity(HttpStatus.NOT_FOUND, path,
                     List.of("Not found product with id=" + id));
-        return ResponseEntity.ok(optionalProduct.get());
+        }
+
+        return ResponseEntity.ok(product.get());
     }
 
     @ExceptionHandler(MethodArgumentTypeMismatchException.class)

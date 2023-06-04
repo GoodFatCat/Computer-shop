@@ -7,13 +7,13 @@ import lombok.NoArgsConstructor;
 @Entity
 @Data
 @NoArgsConstructor
-public class ProductProducer {
+public class ProducerEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
     private String name;
 
-    public ProductProducer(String name) {
+    public ProducerEntity(String name) {
         this.name = name;
     }
 }

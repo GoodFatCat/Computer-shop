@@ -17,7 +17,7 @@ public class MonitorDTO extends AbstractProductDTO {
                 monitor.getPrice(),
                 monitor.getProductCount(),
                 monitor.getProducer().getName());
-        monitorSize = monitor.getSize();
+        monitorSize = monitor.getMonitorSize();
     }
 
     public double getMonitorSize() {

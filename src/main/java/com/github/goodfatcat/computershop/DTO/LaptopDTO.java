@@ -18,7 +18,7 @@ public class LaptopDTO extends AbstractProductDTO {
                 laptop.getPrice(),
                 laptop.getProductCount(),
                 laptop.getProducer().getName());
-        laptopSize = laptop.getSize();
+        laptopSize = laptop.getLaptopSize();
     }
 
     public LaptopSize getLaptopSize() {

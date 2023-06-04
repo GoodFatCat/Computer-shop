@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Optional;
 
 public interface ProductService {
+    ProductEntity save(ProductEntity entity);
     ProductEntity save(ComputerDTO computerDTO);
     ProductEntity save(LaptopDTO laptopDTO);
     ProductEntity save(MonitorDTO monitorDTO);

@@ -17,7 +17,7 @@ public class HardDriveDTO extends AbstractProductDTO {
                 hardDrive.getPrice(),
                 hardDrive.getProductCount(),
                 hardDrive.getProducer().getName());
-        hardDriveCapacity = hardDrive.getCapacity();
+        hardDriveCapacity = hardDrive.getHardDriveCapacity();
     }
 
     public int getHardDriveCapacity() {

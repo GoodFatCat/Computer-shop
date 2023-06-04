@@ -2,7 +2,6 @@ package com.github.goodfatcat.computershop.service;
 
 import com.github.goodfatcat.computershop.DTO.*;
 import com.github.goodfatcat.computershop.model.*;
-import com.github.goodfatcat.computershop.repository.ProducerRepository;
 import com.github.goodfatcat.computershop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,32 +14,31 @@ import java.util.stream.Collectors;
 @Service
 public class ProductServiceImpl implements ProductService {
     private final ProductRepository productRepository;
-    private final ProducerRepository producerRepository;
+    private ProducerService producerService;
 
     @Autowired
-    public ProductServiceImpl(ProductRepository productRepository, ProducerRepository producerRepository) {
+    public ProductServiceImpl(ProductRepository productRepository, ProducerService producerService) {
         this.productRepository = productRepository;
-        this.producerRepository = producerRepository;
+        this.producerService = producerService;
+    }
+
+    @Override
+    public ProductEntity save(ProductEntity entity) {
+        return productRepository.save(entity);
     }
 
     @Override
     public ProductEntity save(ComputerDTO computerDTO) {
-        ProductProducer producer = getProducer(computerDTO);
+        ProducerEntity producer = producerService.getProducerOrCreateNew(computerDTO);
 
         ComputerEntity entity = new ComputerEntity(computerDTO, producer, computerDTO.getComputerForm());
 
         return productRepository.save(entity);
     }
 
-    private ProductProducer getProducer(AbstractProductDTO product) {
-        ProductProducer producer = new ProductProducer(product.getProducerName());
-        producer = producerRepository.findByName(product.getProducerName()).orElse(producer);
-        return producer;
-    }
-
     @Override
     public ProductEntity save(LaptopDTO laptopDTO) {
-        ProductProducer producer = getProducer(laptopDTO);
+        ProducerEntity producer = producerService.getProducerOrCreateNew(laptopDTO);
 
         LaptopEntity entity = new LaptopEntity(laptopDTO, producer, laptopDTO.getLaptopSize());
 
@@ -49,7 +47,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductEntity save(MonitorDTO monitorDTO) {
-        ProductProducer producer = getProducer(monitorDTO);
+        ProducerEntity producer = producerService.getProducerOrCreateNew(monitorDTO);
 
         MonitorEntity entity = new MonitorEntity(monitorDTO, producer, monitorDTO.getMonitorSize());
 
@@ -58,7 +56,7 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public ProductEntity save(HardDriveDTO hardDriveDTO) {
-        ProductProducer producer = getProducer(hardDriveDTO);
+        ProducerEntity producer = producerService.getProducerOrCreateNew(hardDriveDTO);
 
         HardDriveEntity entity = new HardDriveEntity(hardDriveDTO, producer, hardDriveDTO.getHardDriveCapacity());
 

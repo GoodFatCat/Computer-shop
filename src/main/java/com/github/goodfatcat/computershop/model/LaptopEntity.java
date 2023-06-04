@@ -15,10 +15,10 @@ import lombok.ToString;
 @NoArgsConstructor
 @ToString(callSuper = true)
 public class LaptopEntity extends ProductEntity{
-    private LaptopSize size;
+    private LaptopSize laptopSize;
 
-    public LaptopEntity(AbstractProductDTO product, ProductProducer producer, LaptopSize size) {
+    public LaptopEntity(AbstractProductDTO product, ProducerEntity producer, LaptopSize laptopSize) {
         super(product, producer);
-        this.size = size;
+        this.laptopSize = laptopSize;
     }
 }
