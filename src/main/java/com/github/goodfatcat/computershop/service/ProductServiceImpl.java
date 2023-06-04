@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -93,5 +94,10 @@ public class ProductServiceImpl implements ProductService {
             }
             default -> throw new NoSuchElementException("No such type " + type);
         }
+    }
+
+    @Override
+    public Optional<ProductEntity> findById(long id) {
+        return productRepository.findById(id);
     }
 }
