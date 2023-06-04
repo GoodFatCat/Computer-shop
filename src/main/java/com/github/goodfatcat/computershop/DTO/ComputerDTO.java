@@ -8,6 +8,11 @@ public class ComputerDTO extends AbstractProductDTO {
     @NotNull(message = "computerForm must be not null")
     private ComputerForm computerForm;
 
+    public ComputerDTO(String seriesNumber, int price, int count, String producerName, ComputerForm computerForm) {
+        super(seriesNumber, price, count, producerName);
+        this.computerForm = computerForm;
+    }
+
     public ComputerDTO(ComputerEntity computer) {
         super(computer.getSeriesNumber(),
                 computer.getPrice(),

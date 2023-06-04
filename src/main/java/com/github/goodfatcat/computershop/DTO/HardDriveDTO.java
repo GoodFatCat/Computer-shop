@@ -7,6 +7,11 @@ public class HardDriveDTO extends AbstractProductDTO {
     @Positive(message = "hardDriveCapacity must be positive")
     private int hardDriveCapacity;
 
+    public HardDriveDTO(String seriesNumber, int price, int count, String producerName, int hardDriveCapacity) {
+        super(seriesNumber, price, count, producerName);
+        this.hardDriveCapacity = hardDriveCapacity;
+    }
+
     public HardDriveDTO(HardDriveEntity hardDrive) {
         super(hardDrive.getSeriesNumber(),
                 hardDrive.getPrice(),

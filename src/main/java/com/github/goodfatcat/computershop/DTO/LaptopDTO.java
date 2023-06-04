@@ -8,6 +8,11 @@ public class LaptopDTO extends AbstractProductDTO {
     @NotNull(message = "laptopSize must be not null")
     private LaptopSize laptopSize;
 
+    public LaptopDTO(String seriesNumber, int price, int count, String producerName, LaptopSize laptopSize) {
+        super(seriesNumber, price, count, producerName);
+        this.laptopSize = laptopSize;
+    }
+
     public LaptopDTO(LaptopEntity laptop) {
         super(laptop.getSeriesNumber(),
                 laptop.getPrice(),
