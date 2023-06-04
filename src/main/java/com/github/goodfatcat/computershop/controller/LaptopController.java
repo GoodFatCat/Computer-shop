@@ -1,6 +1,6 @@
 package com.github.goodfatcat.computershop.controller;
 
-import com.github.goodfatcat.computershop.DTO.Laptop;
+import com.github.goodfatcat.computershop.DTO.LaptopDTO;
 import com.github.goodfatcat.computershop.service.ProductService;
 import com.github.goodfatcat.computershop.util.ErrorsUtil;
 import jakarta.validation.Valid;
@@ -25,12 +25,12 @@ public class LaptopController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> saveLaptop(@RequestBody @Valid Laptop laptop, Errors errors) {
+    public ResponseEntity<?> saveLaptop(@RequestBody @Valid LaptopDTO laptopDTO, Errors errors) {
         if (errors.hasErrors()) {
             return ErrorsUtil.getResponseEntity(HttpStatus.BAD_REQUEST, globalPath, ErrorsUtil.showErrors(errors));
         }
 
-        productService.save(laptop);
+        productService.save(laptopDTO);
 
         return ResponseEntity.ok("Laptop saved successfully");
     }

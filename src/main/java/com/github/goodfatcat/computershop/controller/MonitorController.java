@@ -1,6 +1,6 @@
 package com.github.goodfatcat.computershop.controller;
 
-import com.github.goodfatcat.computershop.DTO.Monitor;
+import com.github.goodfatcat.computershop.DTO.MonitorDTO;
 import com.github.goodfatcat.computershop.service.ProductService;
 import com.github.goodfatcat.computershop.util.ErrorsUtil;
 import jakarta.validation.Valid;
@@ -25,12 +25,12 @@ public class MonitorController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> saveMonitor(@RequestBody @Valid Monitor monitor, Errors errors) {
+    public ResponseEntity<?> saveMonitor(@RequestBody @Valid MonitorDTO monitorDTO, Errors errors) {
         if (errors.hasErrors()) {
             return ErrorsUtil.getResponseEntity(HttpStatus.BAD_REQUEST, path, ErrorsUtil.showErrors(errors));
         }
 
-        productService.save(monitor);
+        productService.save(monitorDTO);
 
         return ResponseEntity.ok("Monitor saved successfully");
     }

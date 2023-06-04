@@ -2,12 +2,14 @@ package com.github.goodfatcat.computershop.service;
 
 import com.github.goodfatcat.computershop.DTO.*;
 import com.github.goodfatcat.computershop.model.*;
-import com.github.goodfatcat.computershop.repository.HardDriveRepository;
-import com.github.goodfatcat.computershop.repository.MonitorRepository;
 import com.github.goodfatcat.computershop.repository.ProducerRepository;
 import com.github.goodfatcat.computershop.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 public class ProductServiceImpl implements ProductService {
@@ -21,49 +23,75 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public ProductEntity save(ProductEntity product) {
-        return productRepository.save(product);
-    }
+    public ProductEntity save(ComputerDTO computerDTO) {
+        ProductProducer producer = getProducer(computerDTO);
 
-    @Override
-    public ProductEntity save(Computer computer) {
-        ProductProducer producer = getProducer(computer);
-
-        ComputerEntity entity = new ComputerEntity(computer, producer, computer.getComputerForm());
+        ComputerEntity entity = new ComputerEntity(computerDTO, producer, computerDTO.getComputerForm());
 
         return productRepository.save(entity);
     }
 
-    private ProductProducer getProducer(AbstractProduct product) {
+    private ProductProducer getProducer(AbstractProductDTO product) {
         ProductProducer producer = new ProductProducer(product.getProducerName());
         producer = producerRepository.findByName(product.getProducerName()).orElse(producer);
         return producer;
     }
 
     @Override
-    public ProductEntity save(Laptop laptop) {
-        ProductProducer producer = getProducer(laptop);
+    public ProductEntity save(LaptopDTO laptopDTO) {
+        ProductProducer producer = getProducer(laptopDTO);
 
-        LaptopEntity entity = new LaptopEntity(laptop, producer, laptop.getLaptopSize());
-
-        return productRepository.save(entity);
-    }
-
-    @Override
-    public ProductEntity save(Monitor monitor) {
-        ProductProducer producer = getProducer(monitor);
-
-        MonitorEntity entity = new MonitorEntity(monitor, producer, monitor.getMonitorSize());
+        LaptopEntity entity = new LaptopEntity(laptopDTO, producer, laptopDTO.getLaptopSize());
 
         return productRepository.save(entity);
     }
 
     @Override
-    public ProductEntity save(HardDrive hardDrive) {
-        ProductProducer producer = getProducer(hardDrive);
+    public ProductEntity save(MonitorDTO monitorDTO) {
+        ProductProducer producer = getProducer(monitorDTO);
 
-        HardDriveEntity entity = new HardDriveEntity(hardDrive, producer, hardDrive.getHardDriveCapacity());
+        MonitorEntity entity = new MonitorEntity(monitorDTO, producer, monitorDTO.getMonitorSize());
 
         return productRepository.save(entity);
+    }
+
+    @Override
+    public ProductEntity save(HardDriveDTO hardDriveDTO) {
+        ProductProducer producer = getProducer(hardDriveDTO);
+
+        HardDriveEntity entity = new HardDriveEntity(hardDriveDTO, producer, hardDriveDTO.getHardDriveCapacity());
+
+        return productRepository.save(entity);
+    }
+
+    @Override
+    public List<AbstractProductDTO> findAllByType(ProductType type) {
+        switch (type) {
+            case COMPUTER -> {
+                return productRepository.findAllByClass(ComputerEntity.class)
+                        .stream()
+                        .map(ComputerDTO::new)
+                        .collect(Collectors.toList());
+            }
+            case LAPTOP -> {
+                return productRepository.findAllByClass(LaptopEntity.class)
+                        .stream()
+                        .map(LaptopDTO::new)
+                        .collect(Collectors.toList());
+            }
+            case MONITOR -> {
+                return productRepository.findAllByClass(MonitorEntity.class)
+                        .stream()
+                        .map(MonitorDTO::new)
+                        .collect(Collectors.toList());
+            }
+            case HARD_DRIVE -> {
+                return productRepository.findAllByClass(HardDriveEntity.class)
+                        .stream()
+                        .map(HardDriveDTO::new)
+                        .collect(Collectors.toList());
+            }
+            default -> throw new NoSuchElementException("No such type " + type);
+        }
     }
 }

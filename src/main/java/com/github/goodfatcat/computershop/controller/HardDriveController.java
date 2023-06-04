@@ -1,6 +1,6 @@
 package com.github.goodfatcat.computershop.controller;
 
-import com.github.goodfatcat.computershop.DTO.HardDrive;
+import com.github.goodfatcat.computershop.DTO.HardDriveDTO;
 import com.github.goodfatcat.computershop.service.ProductService;
 import com.github.goodfatcat.computershop.util.ErrorsUtil;
 import jakarta.validation.Valid;
@@ -25,12 +25,12 @@ public class HardDriveController {
     }
 
     @PostMapping("")
-    public ResponseEntity<?> saveHardDrive(@RequestBody @Valid HardDrive hardDrive, Errors errors) {
+    public ResponseEntity<?> saveHardDrive(@RequestBody @Valid HardDriveDTO hardDriveDTO, Errors errors) {
         if (errors.hasErrors()) {
             return ErrorsUtil.getResponseEntity(HttpStatus.BAD_REQUEST, globalPath, ErrorsUtil.showErrors(errors));
         }
 
-        productService.save(hardDrive);
+        productService.save(hardDriveDTO);
 
         return ResponseEntity.ok("Hard drive saved successfully");
     }

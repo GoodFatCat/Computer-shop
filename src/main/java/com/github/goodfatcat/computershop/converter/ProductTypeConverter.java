@@ -1,23 +1,13 @@
 package com.github.goodfatcat.computershop.converter;
 
 import com.github.goodfatcat.computershop.model.ProductType;
-import jakarta.persistence.AttributeConverter;
-import jakarta.persistence.Converter;
+import org.springframework.core.convert.converter.Converter;
+import org.springframework.stereotype.Component;
 
-import java.util.stream.Stream;
-
-@Converter(autoApply = true)
-public class ProductTypeConverter implements AttributeConverter<ProductType, String> {
+@Component
+public class ProductTypeConverter implements Converter<String, ProductType> {
     @Override
-    public String convertToDatabaseColumn(ProductType productType) {
-        return productType.getCode();
-    }
-
-    @Override
-    public ProductType convertToEntityAttribute(String s) {
-        return Stream.of(ProductType.values())
-                .filter(productType -> productType.getCode().equals(s))
-                .findFirst()
-                .orElseThrow(() -> new IllegalArgumentException("No such type:" + s));
+    public ProductType convert(String source) {
+        return ProductType.valueOf(source.toUpperCase());
     }
 }

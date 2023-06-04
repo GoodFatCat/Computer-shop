@@ -1,6 +1,6 @@
 package com.github.goodfatcat.computershop.model;
 
-import com.github.goodfatcat.computershop.DTO.AbstractProduct;
+import com.github.goodfatcat.computershop.DTO.AbstractProductDTO;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Table;
 import lombok.Data;
@@ -17,7 +17,7 @@ import lombok.ToString;
 public class LaptopEntity extends ProductEntity{
     private LaptopSize size;
 
-    public LaptopEntity(AbstractProduct product, ProductProducer producer, LaptopSize size) {
+    public LaptopEntity(AbstractProductDTO product, ProductProducer producer, LaptopSize size) {
         super(product, producer);
         this.size = size;
     }

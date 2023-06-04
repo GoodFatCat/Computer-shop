@@ -1,6 +1,6 @@
 package com.github.goodfatcat.computershop.model;
 
-import com.github.goodfatcat.computershop.DTO.AbstractProduct;
+import com.github.goodfatcat.computershop.DTO.AbstractProductDTO;
 import jakarta.persistence.*;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -21,14 +21,7 @@ public abstract class ProductEntity {
     @JoinColumn(name = "producer_id")
     private ProductProducer producer;
 
-    public ProductEntity(String seriesNumber, int price, int productCount, ProductProducer producer) {
-        this.seriesNumber = seriesNumber;
-        this.price = price;
-        this.productCount = productCount;
-        this.producer = producer;
-    }
-
-    public ProductEntity(AbstractProduct product, ProductProducer producer) {
+    public ProductEntity(AbstractProductDTO product, ProductProducer producer) {
         this.seriesNumber = product.getSeriesNumber();
         this.price = product.getPrice();
         this.productCount = product.getCount();

@@ -5,7 +5,7 @@ import jakarta.validation.constraints.Positive;
 import lombok.Data;
 
 @Data
-public abstract class AbstractProduct {
+public abstract class AbstractProductDTO {
     @NotNull(message = "seriesNumber must be not null")
     private String seriesNumber;
     @Positive(message = "price must be positive")
@@ -17,7 +17,7 @@ public abstract class AbstractProduct {
     @NotNull(message = "producerName must be not null")
     private String producerName;
 
-    public AbstractProduct(String seriesNumber, int price, int count, String producerName) {
+    public AbstractProductDTO(String seriesNumber, int price, int count, String producerName) {
         this.seriesNumber = seriesNumber;
         this.price = price;
         this.count = count;
