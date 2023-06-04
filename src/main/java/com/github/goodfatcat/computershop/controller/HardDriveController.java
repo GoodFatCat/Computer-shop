@@ -32,6 +32,6 @@ public class HardDriveController {
 
         productService.save(hardDriveDTO);
 
-        return ResponseEntity.ok("Hard drive saved successfully");
+        return new ResponseEntity<>("Hard drive saved successfully", HttpStatus.CREATED);
     }
 }

@@ -32,6 +32,6 @@ public class MonitorController {
 
         productService.save(monitorDTO);
 
-        return ResponseEntity.ok("Monitor saved successfully");
+        return new ResponseEntity<>("Monitor saved successfully", HttpStatus.CREATED);
     }
 }

@@ -32,7 +32,7 @@ public class ComputerController {
 
         productService.save(computerDTO);
 
-        return ResponseEntity.ok("Computer saved successfully");
+        return new ResponseEntity<>("Computer saved successfully", HttpStatus.CREATED);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)

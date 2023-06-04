@@ -32,7 +32,7 @@ public class LaptopController {
 
         productService.save(laptopDTO);
 
-        return ResponseEntity.ok("Laptop saved successfully");
+        return new ResponseEntity<>("Laptop saved successfully", HttpStatus.CREATED);
     }
 
     @ExceptionHandler(HttpMessageNotReadableException.class)
