@@ -1,4 +1,4 @@
-# Computer-shop Trial task EasyBoot
+# Computer-shop Trial task
 
 # Deployment
 ## Required software:
